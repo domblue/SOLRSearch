@@ -1,0 +1,80 @@
+﻿<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/elgg18" user="domblue" password="kill2fis"/>
+    <document>
+        <entity name="ElggEntity" query="select e.site_guid AS site_guid,	s.subtype AS subtype,
+			e.guid AS entity_guid, 
+			e.owner_guid AS owner_guid, 
+			e.container_guid AS container_guid,
+			e.access_id AS access_id,
+			from_unixtime(e.time_updated) AS time_updated, 
+			o.title AS title,
+			o.description AS description,
+			NULL AS url from elgg_entities e join elgg_objects_entity o on  e.guid = o.guid join elgg_entity_subtypes s on e.subtype = s.id where s.subtype IN ('blog', 'bookmarks', 'page_top', 'page', 'groupforumtopic', 'file', 'thewire') 
+			UNION select e.site_guid AS site_guid,
+			e.type AS subtype,
+			e.guid AS entity_guid, 
+			e.owner_guid AS owner_guid, 
+			e.container_guid AS container_guid,
+			e.access_id AS access_id,
+			from_unixtime(e.time_updated) AS time_updated, 
+			g.name AS title,
+			g.description AS description,
+			NULL as url from elgg_entities e join elgg_groups_entity g on  e.guid = g.guid 
+			UNION select e.site_guid AS site_guid,
+			e.type AS subtype,
+			e.guid AS entity_guid, 
+			e.owner_guid AS owner_guid, 
+			e.container_guid AS container_guid,
+			e.access_id AS access_id,
+			from_unixtime(e.time_updated) AS time_updated, 
+			si.name AS title,
+			si.description AS description,
+			si.url AS url from elgg_entities e join elgg_sites_entity si on  e.guid = si.guid">  
+			<entity name="ElggMetadata" query="SELECT 
+				MAX(CASE WHEN sn.string =  'excerpt' AND sn.id = d.name_id THEN sv.string END ) AS excerpt, 
+				MAX(CASE WHEN sn.string =  'briefdescription' AND sn.id = d.name_id THEN sv.string END ) AS briefdescription,
+				MAX(CASE WHEN sn.string =  'address' AND sn.id = d.name_id THEN sv.string END ) AS address
+				FROM elgg_metadata d
+				JOIN elgg_metastrings sv ON d.value_id = sv.id
+				JOIN elgg_metastrings sn ON d.name_id = sn.id
+				JOIN elgg_entities e ON d.entity_guid = e.guid
+				WHERE e.guid ='${ElggEntity.entity_guid}'">			
+			</entity>   
+			<entity name="ElggTags" query="SELECT 
+				CASE WHEN sn.string = 'tags' AND sn.id = d.name_id THEN sv.string END AS tags
+				FROM elgg_metadata d
+				JOIN elgg_metastrings sv ON d.value_id = sv.id
+				JOIN elgg_metastrings sn ON d.name_id = sn.id
+				JOIN elgg_entities e ON d.entity_guid = e.guid
+				WHERE e.guid = '${ElggEntity.entity_guid}'
+				AND d.name_id = sn.id
+				AND d.value_id = sv.id 
+				AND sn.string = 'tags'">
+			</entity>  
+			<entity name="ElggTopicPosts" query="SELECT 
+				CASE WHEN sn.string = 'group_topic_post' AND sn.id = d.name_id THEN sv.string END AS group_topic_post
+				FROM elgg_annotations d
+				JOIN elgg_metastrings sv ON d.value_id = sv.id
+				JOIN elgg_metastrings sn ON d.name_id = sn.id
+				JOIN elgg_entities e ON d.entity_guid = e.guid
+				WHERE e.guid = '${ElggEntity.entity_guid}'
+				AND d.name_id = sn.id
+				AND d.value_id = sv.id 
+				AND sn.string = 'group_topic_post'
+				ORDER BY d.id">
+			</entity>    
+			<entity name="ElggGenericComment" query="SELECT 
+				CASE WHEN sn.string = 'generic_comment' AND sn.id = d.name_id THEN sv.string END AS generic_comment
+				FROM elgg_annotations d
+				JOIN elgg_metastrings sv ON d.value_id = sv.id
+				JOIN elgg_metastrings sn ON d.name_id = sn.id
+				JOIN elgg_entities e ON d.entity_guid = e.guid
+				WHERE e.guid = '${ElggEntity.entity_guid}'
+				AND d.name_id = sn.id
+				AND d.value_id = sv.id 
+				AND sn.string = 'generic_comment'
+				ORDER BY d.id">
+			</entity> 			
+		</entity>    
+	</document>
+</dataConfig>
