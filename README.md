@@ -1,9 +1,9 @@
 SOLRSearch
 ==========
 
-SOLR Search for Elgg
+SOLR Search for Elgg Version 0.1.0
 
-First Release of SOLR integration into Elgg 0.1.0
+First Release of SOLR integration into Elgg
 
 Far from being production ready and not suited for beginners.
 
