@@ -23,6 +23,8 @@ Copy solrconfig.xml to solr/example/solr/collectionElgg/conf
 
 All xml configs are in the repo under SOLRSearch/Vendor/SOLR_Config_Elgg
 
+Don't forget to put the mysql driver into the lib!
+
 After this start SOLR in solr/example/solr with java -jar start.jar
 
 Now you should be up and running and able to access your SOLR with http://localhost:8983/solr/
