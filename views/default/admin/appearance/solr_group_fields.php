@@ -4,10 +4,10 @@
 	* 
 	* Group Profile Fields Config page
 	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @package solrsearch
+	* @author Daniel Scholz
+	* @copyright ForbiddenRoses
+	* @link
 	*/
 
 	$fields = elgg_view("profile_manager/group_fields/list");

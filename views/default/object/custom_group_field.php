@@ -4,10 +4,10 @@
 	* 
 	* Object view of a custom group field
 	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @package solrsearch
+	* @author Daniel Scholz
+	* @copyright ForbiddenRoses
+	* @link
 	*/
 
 	$handle = "<div onclick='$(\"#" . $vars['entity']->guid . "\").toggle();' class='custom_field_handle'></div>";

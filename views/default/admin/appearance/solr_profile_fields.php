@@ -5,9 +5,9 @@
 	* User Profile Fields Config page
 	* 
 	* @package SOLRSearch
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author Daniel Scholz
+	* @copyright ForbiddenRoses
+	* @link
 	*/
 	
 //	$types = elgg_view("SOLRSearch/profile_types/list");

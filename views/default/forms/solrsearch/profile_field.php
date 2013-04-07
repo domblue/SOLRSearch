@@ -1,13 +1,13 @@
 <?php 
 	/**
-	* Profile Manager
+	* SOLRSearch
 	* 
-	* Profile Field add form
+	* Profile Field Search Options
 	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @package solrsearch
+	* @author Daniel Scholz
+	* @copyright ForbiddenRoses
+	* @link
 	*/
 // domblue - added searchable
 	$form_title = elgg_echo('solrsearch:profile_fields:searchparams');
