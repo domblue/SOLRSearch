@@ -5,6 +5,8 @@
  * @uses $vars['value'] Current search query
  * @uses $vars['class'] Additional class
  * 
+ *  
+ * 
  * Copy / paste of original with solr
  */
 
@@ -36,7 +38,7 @@ $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 
 ?>
 
-<form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url(); ?>solr" method="get">
+<form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url(); ?>solrsearch" method="get">
 	<fieldset>
 		<input type="text" class="search-input" size="21" name="q" value="<?php echo $display_query; ?>" onblur="if (this.value=='') { this.value='<?php echo elgg_echo('search'); ?>' }" onfocus="if (this.value=='<?php echo elgg_echo('search'); ?>') { this.value='' };" />
 		<input type="hidden" name="search_type" value="all" />

@@ -17,12 +17,12 @@ if ($query) {
 
         $title = sprintf(elgg_echo('search:results'), "\"$display_query\"");
         $vars = array('query' => $display_query);
-        $body  = elgg_view('solr/solr', $vars);
+        $body  = elgg_view('solrsearch/content_search', $vars);
 
         $params = array(
         'title' => $title,
         'content' => $body,
-        'sidebar' => elgg_view('solr/sidebar'),
+        'sidebar' => elgg_view('solrsearch/sidebar'),
         );
 
         $layout = elgg_view_layout('one_sidebar', $params);

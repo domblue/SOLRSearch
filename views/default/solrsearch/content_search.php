@@ -11,7 +11,7 @@
  */
 
 
-$base = elgg_get_plugins_path() . 'SOLRSearch/vendor';
+$base = elgg_get_plugins_path() . 'solrsearch/vendor';
 require $base . '/autoload.php';
 
 $config = array(
