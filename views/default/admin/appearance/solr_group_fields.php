@@ -1,19 +1,19 @@
 <?php
 	/**
-	* Profile Manager
+	* SOLRSearch
 	* 
-	* Group Profile Fields Config page
+	* Group Profile Fields Search Config page
 	* 
 	* @package solrsearch
 	* @author Daniel Scholz
 	* @copyright ForbiddenRoses
 	* @link
 	*/
-
-	$fields = elgg_view("profile_manager/group_fields/list");
-	$actions = elgg_view("profile_manager/group_fields/actions");
+elgg_set_view_location('object/custom_group_field', elgg_get_plugins_path() . 'solrsearch/views/', 'default');
+	$fields = elgg_view("solrsearch/group_fields/list");
+	$actions = elgg_view("solrsearch/group_fields/actions");
 	
 	$page_data = $fields . $actions;
 	
-	echo elgg_view("profile_manager/admin/tabs", array("group_fields_selected" => true));
+	echo elgg_view("solrsearch/admin/tabs", array("group_fields_selected" => true));
 	echo $page_data;	

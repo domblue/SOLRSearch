@@ -56,7 +56,7 @@ $(document).ready(function(){
 	$(".solr-search-popup").fancybox();
 });
 
-function toggleOption(field, guid){
+function solr_toggleOption(field, guid){
 	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/solrsearch/toggleOption?&guid=' + guid + '&field=' + field), function(data){
 		if(data == 'true'){
 			$("#" + field + "_" + guid).toggleClass("field_config_metadata_option_disabled field_config_metadata_option_enabled");

@@ -1,6 +1,6 @@
 <?php 
 	/**
-	* Profile Manager
+	* SOLRSearch
 	* 
 	* Group Fields list view
 	* 
@@ -23,15 +23,14 @@
 	$list = elgg_list_entities_from_metadata($options);	
 	
 	if(empty($list)){
-		$list = elgg_echo("profile_manager:profile_fields:no_fields");
+		$list = elgg_echo("solrsearch:profile_fields:no_fields");
 	}
 ?>
 
 <div class="elgg-module elgg-module-inline">
 	<div class="elgg-head">
-		<?php echo elgg_view("output/url", array("text" => elgg_echo("add"), "href" => $vars["url"] . "profile_manager/forms/group_field", "class" => "elgg-button elgg-button-action solr-search-popup"));?>
 		<h3>
-			<?php echo elgg_echo('profile_manager:group_fields:list:title'); ?>
+			<?php echo elgg_echo('solrsearch:group_fields:list:title'); ?>
 		</h3>
 	</div>
 	<div class="elgg-body" id="custom_fields_ordering">

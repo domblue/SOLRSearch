@@ -1,16 +1,16 @@
 <?php 
 	/**
-	* SOLRSearch
+	* Profile Manager
 	* 
-	* Profile Field Search Options
+	* Group Fields add form
 	* 
-	* @package solrsearch
-	* @author Daniel Scholz
-	* @copyright ForbiddenRoses
-	* @link
+	* @package profile_manager
+	* @author ColdTrick IT Solutions
+	* @copyright Coldtrick IT Solutions 2009
+	* @link http://www.coldtrick.com/
 	*/
-// domblue - added searchable
-	$form_title = elgg_echo('solrsearch:profile_fields:searchparams');
+
+	$form_title = elgg_echo('profile_manager:group_fields:add');
 	
 	if($vars["entity"]){
 		
@@ -26,8 +26,6 @@
 		}
 	}
 
-
-	
 	$yes_no_options = array('yes' => elgg_echo('option:yes'),'no' => elgg_echo('option:no'));
 	$no_yes_options = array_reverse($yes_no_options);
 
@@ -54,13 +52,12 @@
 	$formbody .= elgg_view('input/submit', array('value' => elgg_echo('save')));
 	
 	$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/solrsearch/new'));
-
+		
 ?>
 <div class="elgg-module elgg-module-inline" id="custom_fields_form">
 	<div class="elgg-head">
 		<h3>
 			<?php echo $form_title; ?>
-			<span class='custom_fields_more_info' id='more_info_profile_field'></span>
 		</h3>
 	</div>
 	<div class="elgg-body">

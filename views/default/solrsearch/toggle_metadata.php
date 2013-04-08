@@ -40,7 +40,7 @@
 			$class = " field_config_metadata_option_enabled";
 		}
 		$title = elgg_echo('profile_manager:admin:' . $metadata_name);
-		$onclick = "onclick='toggleOption(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
+		$onclick = "onclick='solr_toggleOption(\"" . $metadata_name . "\", " . $entity->guid . "); return false;'";
 //	} else {
 //		$title = elgg_echo('profile_manager:admin:option_unavailable');
 //	}
