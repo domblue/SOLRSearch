@@ -141,6 +141,7 @@ function solrsearch_pagesetup(){
 }
 
 // Initialization functions
+elgg_register_action("solrsearch/edit", dirname(__FILE__) . "/actions/edit.php", "admin");
 
 elgg_register_event_handler('pagesetup', 'system', 'solrsearch_pagesetup');
 elgg_register_action("solrsearch/toggleOption", dirname(__FILE__) . "/actions/toggleOption.php", "admin");

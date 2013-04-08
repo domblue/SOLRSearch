@@ -1,16 +1,16 @@
 <?php 
 	/**
-	* Profile Manager
+	* SOLRSearch
 	* 
-	* Group Fields add form
+	* Group Fields Search Params
 	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @package solrsearch
+	* @author Daniel Scholz
+	* @copyright ForbiddenRoses 2013
+	* @link 
 	*/
 
-	$form_title = elgg_echo('profile_manager:group_fields:add');
+	$form_title = elgg_echo('solrsearch:group_fields:searchparams');
 	
 	if($vars["entity"]){
 		
@@ -31,11 +31,11 @@
 
 	
 	
-	$formbody .= elgg_echo('solrsearch:admin:search_rule') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $search_rule));
-	$formbody .= elgg_echo('solrsearch:admin:search_type') . ":" . elgg_view('input/text', array('name' => 'metadata_name', "value" => $search_type));
+	$formbody .= elgg_echo('solrsearch:admin:search_rule') . ":" . elgg_view('input/text', array('name' => 'search_rule', "value" => $search_rule));
+	$formbody .= elgg_echo('solrsearch:admin:search_type') . ":" . elgg_view('input/text', array('name' => 'search_type', "value" => $search_type));
+	$formbody .= "<div class='elgg-module elgg-module-inline'><div class='elgg-body'>";
 	
-	
-
+	$formbody .= "<table>";
 	$formbody .= "<tr>";
 	$formbody .= "<td>" . elgg_echo('solrsearch:admin:searchable') . ":</td>";
 
@@ -51,7 +51,7 @@
 	$formbody .= elgg_view('input/hidden', array('name' => 'guid', "value" => $guid));
 	$formbody .= elgg_view('input/submit', array('value' => elgg_echo('save')));
 	
-	$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/solrsearch/new'));
+	$form = elgg_view('input/form', array('body' => $formbody, 'action' => $vars['url'] . 'action/solrsearch/edit'));
 		
 ?>
 <div class="elgg-module elgg-module-inline" id="custom_fields_form">
