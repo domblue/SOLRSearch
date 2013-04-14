@@ -1,32 +1,30 @@
 <?php
-	/**
-	* SOLRSearch
-	* 
-	* Category list view
-	* 
-	*  
-	* @package SOLRSearch
-	* @author Daniel Scholz
-	* @copyright ForbiddenRoses
-	* @link 
-	*/
+/**
+ * SOLRSearch
+ *
+ * Category list view
+ * *
+ * @package SOLRSearch
+ * @author Daniel Scholz
+ * @copyright ForbiddenRoses
+ * @link
+ */
 
-	$options = array(
-			"type" => "object",
-			"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
-			"limit" => false,
-			"owner_guid" => elgg_get_site_entity()->getGUID(),
-			"order_by_metadata" => array("name" => "order") 
-		);
+$options = array("type" => "object",
+		"subtype" => CUSTOM_PROFILE_FIELDS_CATEGORY_SUBTYPE,
+		"limit" => false,
+		"owner_guid" => elgg_get_site_entity()->getGUID(),
+		"order_by_metadata" => array("name" => "order")
+);
 
-	$categories = elgg_list_entities_from_metadata($options);	
-	
-	if(!empty($categories)){
-		$list = $categories;
-	} else {
-		$list = elgg_echo("solrsearch:categories:list:no_categories");
-	}
-	
+$categories = elgg_list_entities_from_metadata($options);
+
+if (!empty($categories)) {
+	$list = $categories;
+} else {
+	$list = elgg_echo("solrsearch:categories:list:no_categories");
+}
+
 ?>
 
 <div class="elgg-module elgg-module-inline">
@@ -37,11 +35,24 @@
 		</h3>
 	</div>
 	<div class="elgg-body" id="custom_fields_category_list_custom">
-		<div id="custom_profile_field_category_all" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("all"); ?></a></div>
-		<div id="custom_profile_field_category_0" class="custom_fields_category"><a href="javascript:void(0);" onclick="filterCustomFields(0);"><?php echo elgg_echo("solrsearch:categories:list:default"); ?></a></div>
+		<div id="custom_profile_field_category_all"
+			class="custom_fields_category">
+			<a href="javascript:void(0);" onclick="filterCustomFields();"><?php echo elgg_echo("all"); ?>
+			</a>
+		</div>
+		<div id="custom_profile_field_category_0"
+			class="custom_fields_category">
+			<a href="javascript:void(0);" onclick="filterCustomFields(0);"> <?php echo elgg_echo("solrsearch:categories:list:default"); ?>
+			</a>
+		</div>
 		<?php echo $list; ?>
 	</div>
 </div>
 
-<div class="custom_fields_more_info_text" id="text_more_info_category"><?php echo elgg_echo("solrsearch:tooltips:category");?></div>
-<div class="custom_fields_more_info_text" id="text_more_info_category_list"><?php echo elgg_echo("solrsearch:tooltips:category_list");?></div>
+<div class="custom_fields_more_info_text" id="text_more_info_category">
+	<?php echo elgg_echo("solrsearch:tooltips:category");?>
+</div>
+<div class="custom_fields_more_info_text"
+	id="text_more_info_category_list">
+	<?php echo elgg_echo("solrsearch:tooltips:category_list");?>
+</div>

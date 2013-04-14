@@ -3,6 +3,7 @@
 	* Profile Manager
 	* 
 	* JS (admin pages only, so no extend)
+	*
 	* 
 	* @package solrsearch
 	* @author Daniel Scholz
@@ -102,24 +103,4 @@ function changeFieldType(){
 	$("#custom_fields_form .custom_fields_form_field_option").attr("disabled", "disabled");
 	$("#custom_fields_form .field_option_enable_" + selectedType).removeAttr("disabled");
 }
-
-// categories	
-function changeFieldCategory(field, category_guid){
-	var field_guid = $(field).attr("id").replace("elgg-object-","");
-	category_guid = category_guid.replace("elgg-object-","");
-
-	$.post(elgg.security.addToken('<?php echo $vars['url']; ?>action/profile_manager/changeCategory?guid=' + field_guid + '&category_guid=' + category_guid), function(data){
-		if(data == 'true'){		
-			if(category_guid == 0){
-				category_guid = "";
-			}				 
-			$(field).find(".custom_field").attr("rel", category_guid);
-			$(".custom_fields_category_selected a").click();
-				
-		} else {
-			alert(elgg.echo("profile_manager:actions:change_category:error:unknown"));
-		}
-	});
-}
-
 

@@ -1,122 +1,131 @@
 <?php
+/**
+ * Elgg solr plugin
+ *
+ * @author Daniel Scholz
+ * @copyright Forbiddenroses 2013
+ */
 
-	/**
-	 * Elgg solr plugin
-	 *
-	 * @author Daniel Scholz
-	 * @copyright Forbiddenroses 2013
-	 */
+require_once(dirname(__FILE__) . "/lib/solrsearch.php");
+elgg_register_event_handler('init','system','solr_init');
+/**
+ * SOLR init plugin
+ *
+  * @return void
+ */
+function solr_init() {
 
-	 elgg_register_event_handler('init','system','solr_init');
-
-	 function solr_init() {
-
-//		elgg_register_page_handler('solr', 'solr_page_handler');
-		elgg_register_page_handler('solrsearch', 'solr_page_handler');
-		elgg_register_admin_menu_item('administer', 'solr_export', 'administer_utilities');
-		
-		elgg_extend_view("css/admin", "solrsearch/css/admin");
-		elgg_extend_view("js/admin", "solrsearch/js/admin");
-
-		
-		//Replace default search box for topbar
-		elgg_unextend_view('page/elements/header', 'search/header');
-	    elgg_extend_view('page/elements/header', 'search/header');
-// Ensure Profile Manager gets the view by default
-	    elgg_set_view_location('object/custom_profile_field', elgg_get_plugins_path() . 'profile_manager/views/', 'default');
-	    elgg_set_view_location('object/custom_group_field', elgg_get_plugins_path() . 'profile_manager/views/', 'default');
+	elgg_register_page_handler('solrsearch', 'solr_page_handler');
+	
+	
+	elgg_register_library('solrsearch:functions', elgg_get_plugins_path() . 'solrsearch/lib/solrsearch.php');
+	elgg_extend_view("css/admin", "solrsearch/css/admin");
+	elgg_extend_view("js/admin", "solrsearch/js/admin");
 
 
+	//Replace default search box for topbar
+	elgg_unextend_view('page/elements/header', 'search/header');
+	elgg_extend_view('page/elements/header', 'search/header');
+	// Ensure Profile Manager gets the view by default - we only need this in admin
+	elgg_set_view_location('object/custom_profile_field', elgg_get_plugins_path() . 'profile_manager/views/', 'default');
+	elgg_set_view_location('object/custom_group_field', elgg_get_plugins_path() . 'profile_manager/views/', 'default');
 
-	}
 
-function solr_page_handler($page) { 
+
+}
+/**
+ * SOLR page handler
+ * 
+ * @param array $page current page params
+ * @return boolean success
+ */
+function solr_page_handler($page) {
+
 	elgg_set_context('solr');
 
-    $base = elgg_get_plugins_path() . 'solrsearch/pages/solrsearch';
-if (count($page) < 1)
-{
-	include $base . '/search.php';
-	
-}
-else 
-{
+	$base = elgg_get_plugins_path() . 'solrsearch/pages/solrsearch';
+	if (count($page) < 1) {		
+	}
+	if (count($page) < 1) {
+		include $base . '/search.php';
+	} else {
 
-	switch ($page[0]) {
-		case 'solrsearch' :
-			solr_search_page();
+		switch ($page[0]) {
+			case 'solrsearch' :
+				solr_search_page();
 			break;
 			case "forms":
 				$form = $page[1];
-				if(!empty($form) && elgg_is_admin_logged_in()){
+				if (!empty($form) && elgg_is_admin_logged_in()) {
 					set_input("guid", $page[2]);
 					include(dirname(__FILE__) . "/pages/forms/" . $form . ".php");
 					return true;
 				}
 				break;
-		
-               default:
-                   include $base . '/search.php';
-               break;
-               }
-               exit;
-}
+
+			default:
+				include $base . '/search.php';
+				break;
+		}
+		exit;
 	}
+}
+/**
+ * Handle SOLR Searchinvoked from sidebar
+ * 
+ * @return void
+ */
 function solr_search_page() {
-		// elgg_push_breadcrumb(elgg_echo('search'));
-	
+	// elgg_push_breadcrumb(elgg_echo('search'));
+
 	$entities = get_input('entities');
 	$searchon = get_input('searchon');
-	$searchtype = get_input('searchtype');	
+	$searchtype = get_input('searchtype');
 
-	if(!$entities || !$searchon || !$searchtype)
+	if (!$entities || !$searchon || !$searchtype) {
 		return;
+	}
 
-	
+
 	$queryStr = '';
 	$query = stripslashes(get_input('entities'));
-//	@todo:check whether solarium is doing all the nasty input checking 
+	//	@todo:check whether solarium is doing all the nasty input checking
 
 	switch ($searchon) {
 		case 'all':
 			{
-			break;	
+				break;
 			}
 		case 'title':
 			{
-			$queryStr .= 'title:';	
-			break;
+				$queryStr .= 'title:';
+				break;
 			}
 		case 'desc':
 			{
-			$queryStr .= 'description:';
-			break;
+				$queryStr .= 'description:';
+				break;
 			}
-				
+
 		default:
 			break;
 	}
 
-	$queryStr .= '(' . $query . ')';	
-	if ($searchtype != 'all')
-	{
+	$queryStr .= '(' . $query . ')';
+	if ($searchtype != 'all') {
 		$queryStr .= ' AND subtype:' . $searchtype;
 	}
 	$title = sprintf(elgg_echo('search:results'), "\"$queryStr\"");
 	$vars = array('query' => $queryStr);
 	$body  = elgg_view('solrsearch/content_search', $vars);
 
-	$params = array(
-		'title' => $title,
-		'content' => $body,
-		'sidebar' => elgg_view('solrsearch/sidebar'),
-		);
+	$params = array('title' => $title,
+					'content' => $body,
+					'sidebar' => elgg_view('solrsearch/sidebar'),
+	);
 
 	$layout = elgg_view_layout('one_sidebar', $params);
 	echo elgg_view_page($title, $layout);
-
-	
-	
 
 }
 /**
@@ -124,25 +133,25 @@ function solr_search_page() {
  *
  * @return unknown_type
  */
-function solrsearch_pagesetup(){
-	if(elgg_in_context("admin") && elgg_is_admin_logged_in()){
+function solrsearch_pagesetup() {
+	if (elgg_in_context("admin") && elgg_is_admin_logged_in()) {
 		elgg_load_js('lightbox');
 		elgg_load_css('lightbox');
 			
 			
-		if(elgg_is_active_plugin("groups")){
+		if (elgg_is_active_plugin("groups")) {
 			elgg_register_admin_menu_item('configure', 'solr_group_fields', 'appearance');
 		}
 		elgg_register_admin_menu_item('configure', 'solr_profile_fields', 'appearance');
 			
 
-		
+
 	}
 }
 
 // Initialization functions
 elgg_register_action("solrsearch/edit", dirname(__FILE__) . "/actions/edit.php", "admin");
+elgg_register_action("solrsearch/export_profile_search", dirname(__FILE__) . "/actions/export_profile_search.php", "admin");
 
 elgg_register_event_handler('pagesetup', 'system', 'solrsearch_pagesetup');
 elgg_register_action("solrsearch/toggleOption", dirname(__FILE__) . "/actions/toggleOption.php", "admin");
-?>

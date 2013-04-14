@@ -10,6 +10,7 @@
 	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/elgg_sprites.png) 0 -486px;
 	cursor: pointer;
 }
+
 .custom_fields_more_info:hover {
 	background-position: 0 -468px;
 }

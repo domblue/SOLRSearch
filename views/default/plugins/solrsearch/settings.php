@@ -60,7 +60,7 @@ echo elgg_view("solrsearch/admin/tabs", array("settings_selected" => true));
 		</td>
 	</tr>
 	
-			<tr>
+	<tr>
 		<td colspan="2">
 			<?php echo elgg_echo('solrsearch:settings:profiles:path:'); ?>
 		</td>
@@ -71,5 +71,19 @@ echo elgg_view("solrsearch/admin/tabs", array("settings_selected" => true));
 		</td>
 	</tr>
 
+		<tr>
+		<td colspan="2">
+			<?php echo elgg_echo('solrsearch:settings:access'); ?>
+		</td>
+	</tr>
+		<tr>
+		<td colspan="2">
+			<?php echo elgg_view('input/access', array(
+					"name" => "params[solr_access_id]", 
+					"value" => $vars['entity']->solr_access_id)); ?>
+		</td>
+	</tr>
+	
 </table>
 <br />
+

@@ -1,7 +1,6 @@
 <?php
 	
-	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/"; 
-
+	$plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 ?>
 #custom_fields_ordering {
 	width: 518px;
